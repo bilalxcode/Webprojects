@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+
+    <!-- Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+      crossorigin="anonymous"
+    />
+
+    <title>JS To-Do List</title>
+    <style>
+      body {
+        background: linear-gradient(135deg, #153677, #4e085f);
+        margin: 0; /* Remove default margin */
+        min-height: 100vh; /* Ensure the gradient covers the entire viewport height */
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      class="container"
+      style="
+        background: transparent;
+        margin-top: 100px;
+        padding: 10px;
+        border-radius: 10px;
+      "
+    >
+      <div class="row justify-content-center">
+        <div class="col-auto">
+          <div
+            class="cardbox shadow"
+            style="padding: 10px; background-color: white; border-radius: 5px"
+          >
+            <div class="row">
+              <div class="col-auto">
+                <p
+                  style="
+                    display: inline-block;
+                    color: #153677;
+                    font-weight: 700;
+                  "
+                >
+                  To-Do List
+                </p>
+                <img src="icon.png" height="35px" width="35px" />
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-auto">
+                <input
+                  id="user-input"
+                  type="text"
+                  placeholder="Add Your Task"
+                  style="
+                    padding: 10px;
+                    background: #e3e4e4;
+                    border: 0;
+                    border-radius: 60px;
+                    height: 30px;
+                    cursor: pointer;
+                  "
+                />
+                <button
+                  id="user-button"
+                  onclick="addTask()"
+                  style="
+                    background: #ff5945;
+                    padding: 10px;
+                    border: 0;
+                    border-radius: 44px;
+                    height: 30px;
+                    width: 50px;
+                    cursor: pointer;
+                    font-size: 10px;
+                    color: white;
+                    font-family: sans-serif;
+                  "
+                >
+                  Add
+                </button>
+                <div
+                  id="taskContainer"
+                  style="
+                    font-size: 13px;
+                    font-weight: 500;
+                    margin-top: 10px;
+                    padding: 10px;
+                    cursor: pointer;
+                  "
+                >
+                  <!-- Existing tasks will be added here -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+      integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+      integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js"
+      integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+      crossorigin="anonymous"
+    ></script>
+
+    <script>
+      const inputBox = document.getElementById("user-input");
+      const TaskButton = document.getElementById("user-button");
+      const taskText = document.querySelector(".task-text");
+
+      const taskContainer = document.getElementById("taskContainer");
+
+      function addTask() {
+        const taskText = inputBox.value.trim();
+        if (taskText === "") {
+          alert("You must write something!");
+        } else {
+          const newTask = document.createElement("p");
+          newTask.textContent =
+            "• " +
+            taskText.charAt(0).toUpperCase() +
+            taskText.slice(1).toLowerCase();
+          taskContainer.appendChild(newTask);
+          inputBox.value = "";
+
+          // Get existing tasks from local storage
+          const tasks = getTasksFromLocalStorage();
+
+          // Add the new task to the tasks array
+          tasks.push(newTask.textContent);
+
+          // Save updated tasks to local storage
+          saveTasksToLocalStorage(tasks);
+
+          newTask.addEventListener("click", () => {
+            deleteTask(newTask);
+          });
+        }
+      }
+
+      function deleteTask(taskElement) {
+        taskElement.remove();
+
+        // Get existing tasks from local storage
+        const tasks = getTasksFromLocalStorage();
+
+        // Find and remove the deleted task from the tasks array
+        const taskIndex = tasks.indexOf(taskElement.textContent);
+        if (taskIndex !== -1) {
+          tasks.splice(taskIndex, 1);
+          saveTasksToLocalStorage(tasks);
+        }
+      }
+
+      function saveTasksToLocalStorage(tasks) {
+        localStorage.setItem("tasks", JSON.stringify(tasks));
+      }
+
+      function getTasksFromLocalStorage() {
+        const tasks = JSON.parse(localStorage.getItem("tasks"));
+        return tasks ? tasks : []; // Return an empty array if tasks not found in local storage
+      }
+
+      function displayTasksFromLocalStorage() {
+        const tasks = getTasksFromLocalStorage();
+        tasks.forEach((task) => {
+          const newTask = document.createElement("p");
+          newTask.textContent = task;
+          taskContainer.appendChild(newTask);
+          newTask.addEventListener("click", () => {
+            deleteTask(newTask);
+          });
+        });
+      }
+
+      // Display existing tasks when the page is loaded
+      document.addEventListener(
+        "DOMContentLoaded",
+        displayTasksFromLocalStorage
+      );
+    </script>
+  </body>
+</html>
