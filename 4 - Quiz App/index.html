@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+
+    <!-- Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@100&display=swap"
+      rel="stylesheet"
+    />
+    ">
+    <style>
+      body {
+        background: #001e4d;
+        margin: 0px;
+        padding: 0px;
+      }
+      .correctButton {
+        background: #26fa82;
+        color: #ffffff;
+        border-color: #ffffff;
+        text-align: left;
+        margin: 20px 10px;
+        font-weight: 400;
+        font-size: 13px;
+      }
+
+      .btnAll:hover:not([disabled]) {
+        background-color: #007bff;
+        color: #fff !important;
+        border-color: #007bff;
+      }
+
+      .btnAll.clicked {
+        background-color: #00ff62;
+      }
+
+      .everyButton {
+        text-align: left;
+        margin: 20px 10px;
+        color: #222;
+        font-weight: 400;
+        font-size: 13px;
+      }
+
+      .FalseButton {
+        background: #ff9393;
+        color: #ffffff !important;
+        border-color: #ffffff;
+        text-align: left;
+        margin: 20px 10px;
+        font-weight: 400;
+        font-size: 13px;
+      }
+    </style>
+
+    <title>Quiz App</title>
+  </head>
+  <body>
+    <div
+      class="container"
+      style="
+        background: #fff;
+        border-radius: 10px;
+        padding: 10px 25px;
+        padding-top: 25px;
+        margin-top: 25px;
+      "
+    >
+      <div class="row">
+        <div class="col-auto">
+          <h1
+            style="
+              font-size: 20px;
+              font-weight: bolder;
+              color: #001e4d;
+              padding: 5px;
+            "
+          >
+            Simple Quiz
+          </h1>
+          <hr />
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-auto">
+          <h2
+            id="question"
+            style="font-size: 15px; color: #001e4d; margin-top: 10px"
+          >
+            Question goes here
+          </h2>
+        </div>
+      </div>
+      <div id="answer-buttons">
+        <div class="row">
+          <div class="col-auto" style="margin: 10px 10px">
+            <button
+              type="button"
+              class="everyButton btn btnAll btn-outline-dark btn-lg btn-block"
+            >
+              Answer 1
+            </button>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-auto" style="margin: 10px 10px">
+            <button
+              type="button"
+              class="everyButton btn btnAll btn-outline-dark btn-lg btn-block"
+            >
+              Answer 2
+            </button>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-auto" style="margin: 10px 10px">
+            <button
+              type="button"
+              class="everyButton btn btnAll btn-outline-dark btn-lg btn-block"
+            >
+              Answer 3
+            </button>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-auto" style="margin: 10px 10px">
+            <button
+              type="button"
+              class="everyButton btn btnAll btn-outline-dark btn-lg btn-block"
+            >
+              Answer 4
+            </button>
+          </div>
+        </div>
+      </div>
+      <hr />
+      <div class="row justify-content-center">
+        <div class="col-auto">
+          <button
+            style="
+              border-radius: 10px;
+              margin: 10px 10px;
+              margin-bottom: 30px;
+              background: #001e4d;
+              color: #fff;
+              display: none;
+            "
+            type="button"
+            class="btn btnAll"
+            id="next-btn"
+          >
+            Next
+          </button>
+        </div>
+      </div>
+    </div>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+      integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+      integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js"
+      integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+      crossorigin="anonymous"
+    ></script>
+
+    <script>
+      const questions = [
+        {
+          question: "Which is the largest animal in the world?",
+          answers: [
+            { text: "Shark", correct: "False" },
+            { text: "Blue Whale", correct: "True" },
+            { text: "Elephant", correct: "False" },
+            { text: "Giraffe", correct: "False" },
+          ],
+        },
+        {
+          question: "Which is the smallest continent in the world?",
+          answers: [
+            { text: "Asia", correct: "False" },
+            { text: "Australia", correct: "True" },
+            { text: "Arctic", correct: "False" },
+            { text: "Africa", correct: "False" },
+          ],
+        },
+        {
+          question: "Which is the largest desert in the world?",
+          answers: [
+            { text: "Kalahari", correct: "False" },
+            { text: "Gobi", correct: "False" },
+            { text: "Sahara", correct: "False" },
+            { text: "Antarctica", correct: "True" },
+          ],
+        },
+        {
+          question: "Which is the smallest country in the world?",
+          answers: [
+            { text: "Vatican City", correct: "True" },
+            { text: "Bhutan", correct: "False" },
+            { text: "Nepal", correct: "False" },
+            { text: "Srilanka", correct: "False" },
+          ],
+        },
+      ];
+
+      const questionElement = document.getElementById("question");
+      const answerButtons = document.getElementById("answer-buttons");
+      const nextButton = document.getElementById("next-btn");
+
+      let currentQuestionIndex = 0;
+      let score = 0;
+
+      function startQuiz() {
+        currentQuestionIndex = 0;
+        score = 0;
+        nextButton.innerHTML = "Next";
+        showQuestion();
+      }
+
+      function showQuestion() {
+        resetState();
+        let currentQuestion = questions[currentQuestionIndex];
+        let questionNumber = currentQuestionIndex + 1;
+        questionElement.innerHTML =
+          questionNumber + ". " + currentQuestion.question;
+
+        currentQuestion.answers.forEach((answer) => {
+          const button = document.createElement("button");
+          button.innerHTML = answer.text;
+          button.classList.add(
+            "everyButton",
+            "btn",
+            "btnAll",
+            "btn-outline-dark",
+            "btn-lg",
+            "btn-block"
+          );
+          answerButtons.appendChild(button);
+
+          if (answer.correct) {
+            button.dataset.correct = answer.correct;
+          }
+
+          button.addEventListener("click", selectAnswer);
+        });
+      }
+
+      function resetState() {
+        nextButton.style.display = "none";
+        while (answerButtons.firstChild) {
+          answerButtons.removeChild(answerButtons.firstChild);
+        }
+      }
+
+      function selectAnswer(e) {
+        const selectedBtn = e.target;
+        const isCorrect = selectedBtn.dataset.correct == "True";
+        if (isCorrect) {
+          nextButton.style.display = "block";
+
+          selectedBtn.classList.remove("everyButton");
+          selectedBtn.classList.remove("btnAll", "btn-outline-dark");
+          score++;
+
+          selectedBtn.classList.add("correctButton");
+        } else {
+          selectedBtn.classList.remove("everyButton");
+          selectedBtn.classList.remove("btnAll", "btn-outline-dark");
+          selectedBtn.classList.add("FalseButton");
+        }
+
+        Array.from(answerButtons.children).forEach((button) => {
+          if (button.dataset.correct === "True") {
+            button.classList.add("correctButton");
+            button.classList.remove("everyButton");
+            button.classList.remove("btnAll", "btn-outline-dark");
+          }
+
+          button.disabled = true;
+        });
+        nextButton.style.display = "block";
+      }
+
+      function showScore() {
+        resetState();
+        questionElement.innerHTML = `You score ${score} out of ${questions.length}!`;
+        nextButton.innerHTML="Play Again";
+        nextButton.style.display="block";
+      }
+
+      function handleNextButton() {
+        currentQuestionIndex++;
+        if (currentQuestionIndex < questions.length) {
+          showQuestion();
+        } else {
+          showScore();
+        }
+      }
+
+      nextButton.addEventListener("click", () => {
+        if (currentQuestionIndex < questions.length) {
+          handleNextButton();
+        } else {
+          startQuiz();
+        }
+      });
+
+      startQuiz();
+    </script>
+  </body>
+</html>
