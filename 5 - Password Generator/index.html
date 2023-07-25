@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+
+    <!-- Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+      crossorigin="anonymous"
+    />
+
+    <title>Password Generator</title>
+    <style>
+      body {
+        background: #011a43;
+        margin: 0px;
+        padding: 0px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-auto">
+          <h1
+            style="
+              font-size: 35px;
+              margin-top: 100px;
+              color: aliceblue;
+              border-bottom: 2px solid #019f55;
+              padding: 10px;
+            "
+          >
+            Generate a <br />
+            <span style="color: #019f55">Random Password</span>
+          </h1>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-auto">
+          <input
+            style="
+              margin: 10px;
+              padding: 15px 45px;
+              outline: 0;
+              border-radius: 10px;
+              border: 0;
+            "
+            type="text"
+            placeholder="Password"
+            id="inputField"
+          />
+          <button
+            id="copyButton"
+            style="
+              outline: 0;
+              margin-left: -50px;
+              border: 0;
+              border-radius: 5px;
+            "
+          >
+            <img src="copy.png" alt="" width="15px" height="15px" />
+          </button>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-auto">
+          <button
+            id="generateButton"
+            style="
+              margin: 10px;
+              padding: 5px 35px;
+              outline: 0;
+              outline: 0;
+              border: 0;
+              border-radius: 5px;
+              background-color: #019f55;
+              color: aliceblue;
+            "
+          >
+            <img src="generate.png" alt="" width="15px" height="25px" />
+
+            Generate
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+      integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+      integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js"
+      integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+      crossorigin="anonymous"
+    ></script>
+
+    <script>
+      const copyButton = document.getElementById("copyButton");
+      const inputField = document.getElementById("inputField");
+      const generateButton = document.getElementById("generateButton");
+
+      generateButton.addEventListener("click", generatePassword);
+
+      function generatePassword() {
+        const allowedChars =
+          "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()";
+        let password = "";
+
+        for (let i = 0; i < 12; i++) {
+          const randomIndex = Math.floor(Math.random() * allowedChars.length);
+          password += allowedChars.charAt(randomIndex);
+        }
+
+        inputField.value = password;
+
+        return password;
+      }
+
+      copyButton.addEventListener("click", copyPassword);
+
+      function copyPassword() {
+        inputField.select();
+        document.execCommand("copy");
+        if (inputField.value != "") {
+          alert("Password copied to clipboard!");
+        } else {
+          alert("There is no password to copy.");
+        }
+      }
+    </script>
+  </body>
+</html>
