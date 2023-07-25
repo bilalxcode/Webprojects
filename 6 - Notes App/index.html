@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+
+    <!-- Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+      crossorigin="anonymous"
+    />
+
+    <title>Notes App</title>
+
+    <style>
+      body {
+        background: #b4eeb4;
+        font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
+          sans-serif;
+      }
+
+      .btn:hover {
+        color: #43e243;
+        background: black;
+        box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24),
+          0 17px 50px 0 rgba(0, 0, 0, 0.19);
+      }
+
+      .notes {
+        width: 100%;
+        width: 300px;
+        max-width: 500px;
+        height: 150px;
+        background: #fff;
+        color: #333;
+        padding: 20px;
+        margin: 20px 0px;
+        outline: none;
+        border-radius: 5px;
+        /* display: none; */
+      }
+
+      .buttonClass {
+        border: 2px solid salmon;
+        color: #333;
+        border: 0;
+        outline: 0;
+        border-radius: 25px;
+        font-size: 10px;
+        margin-top: 5px;
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container" style="padding: 10px 50px">
+      <div class="row" style="margin-top: 50px">
+        <div class="col-auto">
+          <img
+            src="notes.png"
+            alt=""
+            height="35px"
+            width="35px"
+            style="margin-top: -20px"
+          />
+          <h1 style="display: inline-block; color: rgb(0, 0, 0)">Notes</h1>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-auto">
+          <button
+            id="createNote"
+            class="btn"
+            style="
+              outline: 0;
+              border: 2px solid;
+              border-radius: 20px;
+              padding: 5px 15px;
+            "
+          >
+            <img
+              src="edit.png"
+              alt=""
+              height="15px"
+              width="15px"
+              style="margin: 0px 10px"
+            />Create Note
+          </button>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-auto">
+          <div class="nodescontainer">
+            <p id="note" contenteditable="true" class="notes"></p>
+            <button id="deleteBtn" class="buttonClass">Delete Task</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+      integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+      integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js"
+      integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+      crossorigin="anonymous"
+    ></script>
+
+    <script>
+      const createButton = document.getElementById("createNote");
+      const noteParagraph = document.getElementById("note");
+      const deleteBtn = document.getElementById("deleteBtn");
+
+      const nodescontainer = document.querySelector(".nodescontainer");
+      createButton.addEventListener("click", noteCreation);
+      deleteBtn.addEventListener("click", deleteNote);
+
+      const dynamicElements = [];
+
+      function noteCreation() {
+        const newNote = document.createElement("p");
+        const newNoteButton = document.createElement("button");
+
+        nodescontainer.appendChild(newNote);
+        nodescontainer.appendChild(newNoteButton);
+
+        newNote.classList.add("notes");
+        newNote.setAttribute("contenteditable", "true");
+
+        newNoteButton.textContent = "Delete Task";
+
+        newNoteButton.classList.add("buttonClass");
+        newNoteButton.style.display = "block";
+
+        newNoteButton.addEventListener("click", function () {
+          deleteNoteFromArray(newNote, newNoteButton);
+        });
+
+        dynamicElements.push({ note: newNote, button: newNoteButton });
+      }
+
+      function deleteNoteFromArray(noteElement, buttonElement) {
+        noteElement.remove();
+        buttonElement.remove();
+        const index = dynamicElements.findIndex(
+          (item) => item.note === noteElement && item.button === buttonElement
+        );
+        if (index !== -1) {
+          dynamicElements.splice(index, 1);
+        }
+      }
+    </script>
+  </body>
+</html>
