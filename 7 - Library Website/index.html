@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <!-- Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+      crossorigin="anonymous"
+    />
+    <style>
+      body {
+        background: #f8f8ff;
+      }
+    </style>
+    <title></title>
+  </head>
+  <body>
+
+      <div
+        class="col"
+        style="
+          background-color: rgb(234, 236, 236);
+          padding: 0px;
+          margin-bottom: 10px;
+        "
+      >
+        <nav class="navbar navbar-expand-lg bg-body-tertiary">
+            <a class="navbar-brand" href="#" style="color: rgb(0, 0, 0)">
+              <img
+                src="library.png"
+                height="45px"
+                width="55px"
+                alt=""
+                style="
+                  border-radius: 10px;
+                  background-color: rgb(234, 236, 236);
+                "
+            /></a>
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarSupportedContent"
+              aria-controls="navbarSupportedContent"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                  <a
+                    style="color: rgb(0, 0, 0)"
+                    class="nav-link active"
+                    aria-current="page"
+                    href="#"
+                    >Home</a
+                  >
+                </li>
+              </ul>
+              <form class="d-flex" role="search">
+                <input
+                  class="form-control me-2"
+                  type="search"
+                  placeholder="Search"
+                  aria-label="Search"
+                  id="searchBar"
+                />
+                <button
+                  style="color: rgb(0, 0, 0); margin-left: 10px"
+                  class="btn btn-outline-dark"
+                  type="submit"
+                >
+                  Search
+                </button>
+              </form>
+            </div>
+          </div>
+        </nav>
+
+        <div id="message"></div>
+
+    <div
+      class="container mx-auto my-auto"
+      style="
+        margin: 0px;
+        padding: 20px 10px ;
+        background-color: #f8f8ff;
+
+        border-radius: 10px;
+        font-size: 15px;
+      "
+    >
+      <div class="row">
+        <div class="col-auto">
+          <h3>Wisdom House Library</h3>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <form id="libraryForm">
+            <div class="form-group row">
+              <label for="nameInput" class="col-sm-2 col-form-label"
+                >Name</label
+              >
+              <div class="col-sm-10">
+                <input
+                  id="nameInput"
+                  type="text"
+                  class="form-control"
+                  required
+                />
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="authorInput" class="col-sm-2 col-form-label">Author</label>
+              <div class="col-sm-10">
+                <input
+                  id="authorInput"
+                  type="text"
+                  class="form-control"
+                  required
+                />
+              </div>
+            </div>
+            <fieldset class="form-group">
+              <div class="row">
+                <legend class="col-form-label col-sm-2 pt-0">Type</legend>
+                <div class="col-sm-10">
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="gridRadios"
+                      id="fiction"
+                      value="fiction"
+                    />
+                    <label class="form-check-label" for="fiction"
+                      >Fiction</label
+                    >
+                  </div>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="gridRadios"
+                      id="programming"
+                      value="programming"
+                    />
+                    <label class="form-check-label" for="programming"
+                      >Computer Programming</label
+                    >
+                  </div>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="gridRadios"
+                      id="cooking"
+                      value="cooking"
+                      required
+                    />
+                    <label class="form-check-label" for="cooking"
+                      >Cooking</label
+                    >
+                  </div>
+                </div>
+              </div>
+            </fieldset>
+            <div class="form-group row">
+              <div class="col-sm-10">
+                <button id="submitButton" type="submit" class="btn btn-primary">
+                  Add Book
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+      <hr />
+      <div class="row">
+        <div class="col-auto">
+          <h3>Your Books</h3>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <div class="table-responsive">
+            <table class="table">
+              <thead class="thead-dark">
+                <tr>
+                  <th scope="col">Name</th>
+                  <th scope="col">Author</th>
+                  <th scope="col">Type</th>
+                  <th scope="col">Remove</th>
+
+                </tr>
+              </thead>
+              <tbody id="tableBody">
+                <tr>
+                  <!-- <th scope="row">1</th>
+                  <td>Mark</td>
+                  <td>Otto</td>
+                  <td>@mdo</td> -->
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+    <script>
+
+
+   let books=[];
+      class Book {
+        constructor(givenName, givenAuthor, givenType) {
+          this.name = givenName;
+          this.author = givenAuthor;
+          this.type = givenType;
+        }
+      }
+
+      class Display{
+
+
+        saveToLocalStorage(){
+            localStorage.setItem("books",JSON.stringify(books));
+        }
+
+        getFromLocalStorage(){
+            const storedBooks=localStorage.getItem("books");
+            if(storedBooks){
+                books=JSON.parse(storedBooks);
+            }
+            else{
+                books=[];
+            }
+        }
+
+
+        removeBook(event) { 
+      const tableRow = event.target.closest("tr");
+      if (tableRow) {
+        const bookIndex = tableRow.dataset.index;
+        books.splice(bookIndex, 1); // Remove the book from the array
+        tableRow.remove(); // Remove the row from the table
+        this.updateBookNumbers(); // Update book numbers in the table
+        this.saveToLocalStorage(); // Save the updated array to local storage
+        this.show("success", "Record has been deleted");
+      }
+    }
+
+        validate(book){
+            if(book.name.length<2||book.author.length<2){
+                return false;
+            }
+            else{
+                return true;
+            }
+        }
+
+        add(book){
+            console.log("Adding to Ui");
+        books.push(book);
+            let tableBody=document.getElementById("tableBody");
+            let uiString=`<tr>
+                  <td>${book.name}</td>
+                  <td>${book.author}</td>
+                  <td>${book.type}</td>
+                  <td><button style="
+    width: 35px;
+    height: 30px;
+    border:0;
+    outline:0;
+    font-size: 10px;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+" type="button" class="removeButton">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
+    </svg>
+</button>
+
+</td>
+                </tr>`;
+
+            tableBody.innerHTML+=uiString;
+
+            const removeButtons = document.getElementsByClassName("removeButton");
+            for (let i = 0; i < removeButtons.length; i++) {
+            removeButtons[i].addEventListener("click", this.removeBook.bind(this));
+          }
+
+          this.saveToLocalStorage();
+
+        }
+    //     areBooksAdded() {
+    //   const tableBody = document.getElementById("tableBody");
+    //   return tableBody.childElementCount > 0;
+    // }
+
+        updateBookNumbers() {
+          const rows = document.querySelectorAll("#tableBody tr");
+          rows.forEach((row, index) => {
+            row.dataset.index = index;
+          });
+        }
+
+        displayBooksFromLocalStorage() {
+      const storedBooks = localStorage.getItem("books");
+      if (storedBooks) {
+        const books = JSON.parse(storedBooks);
+        let tableBody = document.getElementById("tableBody");
+        tableBody.innerHTML = ""; 
+        books.forEach((book, index) => {
+          let uiString = `<tr>
+            <td>${book.name}</td>
+            <td>${book.author}</td>
+            <td>${book.type}</td>
+            <td><button style="
+              width: 35px;
+              height: 30px;
+              border: 0;
+              outline: 0;
+              font-size: 10px;
+              font-weight: bold;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+            " type="button" class="removeButton" data-index="${index}">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
+              </svg>
+            </button></td>
+          </tr>`;
+          tableBody.innerHTML += uiString;
+        });
+
+        const removeButtons = document.getElementsByClassName("removeButton");
+        for (let i = 0; i < removeButtons.length; i++) {
+          removeButtons[i].addEventListener("click", this.removeBook.bind(this));
+        }
+      }
+    }
+
+        show(type,displayMessage){
+            let message=document.getElementById("message");
+            let boldText;
+            if(type==="success"){
+                boldText="Success";
+
+            }else{
+                boldText="Error! "
+            }
+
+            message.innerHTML = `<div class="alert alert-${type} alert-dismissible fade show" role="alert">
+                                <strong>${boldText}:</strong> ${displayMessage}
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">×</span>
+                                </button>
+                            </div>`;
+
+                            setTimeout(function () {
+                            message.innerHTML = ''
+                            }, 5000);
+
+        }
+      }
+      let libraryForm = document.getElementById('libraryForm');
+      libraryForm.addEventListener('submit', libraryFormSubmit);
+
+function libraryFormSubmit(e) {
+    console.log('YOu have submitted library form');
+    e.preventDefault();
+    let name = document.getElementById('nameInput').value;
+    let author = document.getElementById('authorInput').value;
+    let type;
+    let fiction = document.getElementById('fiction');
+    let programming = document.getElementById('programming');
+    let cooking = document.getElementById('cooking');
+
+    if (fiction.checked) {
+        type = fiction.value;
+    }
+    else if (programming.checked) {
+        type = programming.value;
+    }
+    else if (cooking.checked) {
+        type = cooking.value;
+    }
+
+    let book = new Book(name, author, type);
+    let display=new Display();
+    if(display.validate(book)){
+    display.add(book);
+    display.show('success','Your book has been successfully added');
+    }
+    else{
+        display.show('danger','Sorry you can not add this book');
+    }
+
+    libraryForm.reset();
+
+}
+
+      window.onload = function () {
+    let display = new Display();
+    display.getFromLocalStorage();
+    display.displayBooksFromLocalStorage();
+  };
+    </script>
+  </body>
+</html>
+
+
